@@ -3,8 +3,69 @@ import './App.css'
 
 export default function PetList(props) {
 
-    const { setShowedPets, showedPets } = props
+    const { adoptedPets, setAdoptedPets } = props
 
+    const pets = [
+
+        {
+            name: "Petey",
+            type: 'dog',
+            race: "Pitbull ",
+            location: "New York",
+            sexe: "Female",
+            image: "Pitbull.jpg"
+        },
+        {
+            name: "Tayson",
+            type: 'dog',
+            race: "Chienloup ",
+            location: "Montreal",
+            sexe: "Male",
+            image: "Chienloup.jpg"
+        },
+        {
+            name: "Bella",
+            type: 'cat',
+            race: "Sheepdog ",
+            location: "Florida",
+            sexe: "Male",
+            image: "Sheepdog.jpg"
+        },
+        {
+            name: "Cali",
+            type: 'bird',
+            race: "Pitbull ",
+            location: "Boston",
+            sexe: "Female",
+            image: "Pitbullterrier.jpg"
+        },
+        {
+            name: "Rupert",
+            type: 'dog',
+            race: "Pitbull ",
+            location: "Montreal",
+            sexe: "Male",
+            image: "Pitbullterrierb.jpg"
+        },
+        {
+            name: "Ben",
+            type: 'dog',
+            race: "Pitbull ",
+            location: "Montreal",
+            sexe: "Male",
+            image: "Pitbullterrierb.jpg"
+        },
+        {
+            name: "Wolf",
+            type: 'cat',
+            race: "Berger Allemand ",
+            location: "Otawa",
+            sexe: "Male",
+            image: "germansheepdog.jpg"
+        }
+    ]
+
+    const [showedPets, setShowedPets] = useState(pets);
 
 
     var uniquetype = [...new Set(pets.map(pet => pet.type))]
@@ -24,11 +85,15 @@ export default function PetList(props) {
         setShowedPets(filteredList)
     }
 
+    const adoptPet = (e, pet) => {
+        e.preventDefault()
+        setAdoptedPets([...adoptedPets, pet])
+    }
 
     useEffect(() => {
-        console.log(showedPets)
+        console.log(adoptedPets)
 
-    }, [showedPets]);
+    }, [adoptedPets]);
 
 
     return (
@@ -71,7 +136,7 @@ export default function PetList(props) {
                         <h1>{pet.name}</h1>
                         <h5>{pet.race}</h5>
                         <p>{pet.location}, {pet.sexe}</p>
-                        <button>Adopter {pet.name}</button>
+                        <button onClick={(e) => adoptPet(e, pet)}>Adopter {pet.name}</button>
                     </div>
                 })
                     : <p>No animals with this filter</p>

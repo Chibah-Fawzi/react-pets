@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PetList from './PetList'
 import Home from './components/Home'
+import Profile from './components/Profile'
 import './App.css'
 import { Route, Routes, Link } from 'react-router-dom'
 
@@ -65,7 +66,9 @@ export default function App() {
     }
   ]
 
-  const [showedPets, setShowedPets] = useState(pets);
+  const [adoptedPets, setAdoptedPets] = useState();
+
+
   const [data, setData] = useState([]);
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/todos/')
@@ -81,8 +84,8 @@ export default function App() {
       </nav>
 
       <Routes>
-        <Route path='pets' element={<PetList showedPets={showedPets} setShowedPets={setShowedPets} />} />
-        <Route path='' element={<Profile showedPets={showedPets} />} />
+        <Route path='pets' element={<PetList adoptedPets={adoptedPets} setadoptedPets={setAdoptedPets} />} />
+        <Route path='' element={<Profile adoptedPets={adoptedPets} />} />
       </Routes>
 
       {data.map(e => <h6>{e.title}</h6>)}
